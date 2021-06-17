@@ -24,7 +24,9 @@
           <router-link :to="{ name: 'mv' }" tag="a">MV</router-link>
         </li>
         <!-- 继续添加 -->
-
+        <li>
+          <router-link :to="{ name: 'mall' }" tag="a">云商城</router-link>
+        </li>
       </ul>
       <div class="search" @click="openSearchPop">
         <i class="iconfont nicesearch-o"></i>
@@ -46,10 +48,9 @@
               <el-dropdown-item icon="el-icon-user" command="personal">
                 个人主页
               </el-dropdown-item>
-              <el-dropdown-item icon="el-icon-medal">我的等级</el-dropdown-item>
-              <el-dropdown-item icon="el-icon-setting"
-                >个人设置</el-dropdown-item
-              >
+              <el-dropdown-item icon="el-icon-goods">我的购物车</el-dropdown-item>
+              <el-dropdown-item icon="el-icon-time">历史记录</el-dropdown-item>
+              
               <!-- <el-dropdown-item
                 divided
                 icon="el-icon-switch-button"
@@ -60,7 +61,7 @@
             </el-dropdown-menu>
           </el-dropdown>
         </div>
-        <div class="no-login flex-row" @click="login" v-else>登录</div>
+        <div class="no-login flex-row" @click="login" v-else>登录 / 注册</div>
       </div>
 
       <!-- 搜索框 -->
@@ -268,7 +269,7 @@ export default {
     // 获取用户信息
     this.loginLoading = false
     this.getUserDetail("545406676")
-    window.localStorage.setItem('loginStatu', true)
+    window.localStorage.setItem('loginStatu', false)
     this.setLoginStatu(true)
 
   },
