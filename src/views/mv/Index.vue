@@ -165,7 +165,6 @@ export default {
         this.loadStatus = false
         let res = await this.$api.getMvAll(this.params)
         if (res.code === 200) {
-          console.log(res)
           this.mvs = this.mvs.concat(this._normalizeVideos(res.data))
           if (res.hasMore) {
             this.loading = true

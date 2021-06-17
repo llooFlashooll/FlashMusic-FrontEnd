@@ -1,5 +1,7 @@
 <template>
   <div class="playlist-detail container">
+
+    <!-- 歌单详情左侧栏 -->
     <div class="left shadow">
       <div class="top">
         <div class="avatar">
@@ -43,6 +45,7 @@
           </div>
         </div>
       </div>
+      <!-- 歌曲详情 -->
       <div class="content" v-loading="loading">
         <artist-list
           :songs="songs"
@@ -52,6 +55,8 @@
         />
       </div>
     </div>
+
+    <!-- 歌单详情右侧栏 -->
     <div class="right">
       <div class="like module shadow">
         <div class="card-header flex-row">

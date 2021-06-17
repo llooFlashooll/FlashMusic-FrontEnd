@@ -4,12 +4,14 @@
       <div class="top">
         <div class="top-mask">
           <div class="singer-box flex-column flex-center">
+            <!-- 头像 -->
             <div class="avatar transition">
               <img :src="detail.img1v1Url + '?param=200y200'" />
               <div class="level flex-center transition" v-show="level">
                 <i class="iconfont icon-level" :class="level"></i>
               </div>
             </div>
+            <!-- 名字 -->
             <p class="nickname">
               {{ detail.name }}
               <i class="iconfont" :class="gender"></i>

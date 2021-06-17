@@ -1,5 +1,6 @@
 <template>
   <div class="mv-detail container">
+    <!-- mv详情左侧栏 -->
     <div class="left shadow">
       <div class="video-container">
         <video
@@ -95,6 +96,7 @@
         </div>
       </div>
     </div>
+    <!-- mv详情右侧栏 -->
     <div class="right">
       <div class="profile module shadow">
         <div class="card-header flex-row">

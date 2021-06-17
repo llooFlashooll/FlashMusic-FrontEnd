@@ -3,10 +3,10 @@
     <div class="copyright">
       <div class="container flex-column">
         <p>
-          <span class="mr5">Copyright © 2012-2020</span>
-          <a href="https://gitee.com/lxhcool">nicemusic 演示站</a>
+          <span class="mr5">Copyright © 2021</span>
+          <a href="https://space.bilibili.com/383431110">flashmusic</a>
           <span>. Designed by</span>
-          <a href="https://www.lxhcool.cn" target="_blank">LXH</a>.
+          <a href="https://github.com/llooFlashooll" target="_blank">llooFlashooll</a>.
         </p>
       </div>
     </div>

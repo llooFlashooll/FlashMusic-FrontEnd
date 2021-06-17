@@ -1,5 +1,6 @@
 <template>
   <div class="album-detail container">
+    <!-- 专辑详情左侧 -->
     <div class="left shadow">
       <div class="top">
         <div class="avatar">
@@ -37,6 +38,7 @@
         <artist-list :songs="songs" :isPerson="true" />
       </div>
     </div>
+    <!-- 专辑详情右侧 -->
     <div class="right">
       <!-- <div class="like module shadow">
         <div class="card-header flex-row">

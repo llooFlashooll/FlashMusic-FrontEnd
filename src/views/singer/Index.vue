@@ -32,6 +32,8 @@
         </li>
       </ul>
     </div>
+
+    <!-- 加载更多 -->
     <load-more @scroll-state="load">
       <ul class="singer-list">
         <singer-item v-for="item of singers" :key="item.id" :item="item" />
@@ -198,7 +200,9 @@ export default {
   }
 }
 </script>
+
 <style lang="stylus" scoped>
+
 .singer-wrap {
   // height: 100vh;
   margin-top: -20px;

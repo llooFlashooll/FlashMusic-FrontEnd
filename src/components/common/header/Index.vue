@@ -23,17 +23,20 @@
         <li>
           <router-link :to="{ name: 'mv' }" tag="a">MV</router-link>
         </li>
-        <li>
-          <a href="https://gitee.com/lxhcool" target="_blank">GITEE</a>
-        </li>
+        <!-- 继续添加 -->
+
       </ul>
       <div class="search" @click="openSearchPop">
         <i class="iconfont nicesearch-o"></i>
       </div>
+
+      <!-- 登录和下拉框功能 -->
       <div class="userbox">
         <div class="line"></div>
         <div class="is-login flex-row" v-if="loginStatu">
+          <!-- 获取用户信息，create时调用 -->
           <el-avatar class="avatar" :src="userInfo.avatarUrl"></el-avatar>
+          <!-- 下拉框 -->
           <el-dropdown trigger="click" @command="handleCommand">
             <span class="el-dropdown-link">
               {{ userInfo.nickname }}
@@ -47,18 +50,20 @@
               <el-dropdown-item icon="el-icon-setting"
                 >个人设置</el-dropdown-item
               >
-              <el-dropdown-item
+              <!-- <el-dropdown-item
                 divided
                 icon="el-icon-switch-button"
                 command="logout"
               >
                 退出登录
-              </el-dropdown-item>
+              </el-dropdown-item> -->
             </el-dropdown-menu>
           </el-dropdown>
         </div>
         <div class="no-login flex-row" @click="login" v-else>登录</div>
       </div>
+
+      <!-- 搜索框 -->
       <div class="search-wrap" :class="[searchOpenClass, searchCloseClass]">
         <div class="overlay" @click="closeSearchPop"></div>
         <div class="search-body">
@@ -118,6 +123,8 @@
 
 <script>
 import { mapGetters, mapActions } from 'vuex'
+import { mapMutations } from 'vuex'
+
 export default {
   data() {
     return {
@@ -129,13 +136,13 @@ export default {
     }
   },
   components: {},
-  //监听属性 类似于data概念
+  // 监听属性 类似于data概念
   computed: {
     ...mapGetters(['userInfo', 'loginStatu', 'searchHistory'])
   },
-  //监控data中的数据变化
+  // 监控data中的数据变化
   watch: {},
-  //方法集合
+  // 方法集合
   methods: {
     // 展开搜索框
     openSearchPop() {
@@ -190,12 +197,15 @@ export default {
         console.log(error)
       }
     },
+
+    
     // 登录
     login() {
       this.$router.push({
         name: 'login'
       })
     },
+
     async handleCommand(command) {
       switch (command) {
         case 'personal':
@@ -219,21 +229,59 @@ export default {
           break
       }
     },
+
+    // 获取个人信息
+    async getUserDetail(uid) {
+      try {
+        let res = await this.$api.getUserDetail(uid)
+        if (res.code === 200) {
+          let userInfo = res.profile
+          userInfo.level = res.level
+          userInfo.listenSongs = res.listenSongs
+          userInfo.createTime = res.createTime
+          userInfo.createDays = res.createDays
+          window.localStorage.setItem('userInfo', JSON.stringify(userInfo))
+          this.setUserInfo(res.profile)
+
+          setTimeout(() => {
+            this.loginLoading = false
+            this.$router.go(-1)
+          }, 1500)
+        }
+      } catch (error) {
+        console.log(error)
+      }
+    },
     ...mapActions([
       'saveSearchHistory',
       'deleteSearchHistory',
       'clearSearchHistory'
-    ])
+    ]),
+    // 设置用户信息
+    ...mapMutations({
+      setUserInfo: 'SET_USERINFO',
+      setLoginStatu: 'SET_LOGINSTATU'
+    })
   },
   //生命周期 - 创建完成（可以访问当前this实例）
-  created() {},
+  created() {
+    // 获取用户信息
+    this.loginLoading = false
+    this.getUserDetail("545406676")
+    window.localStorage.setItem('loginStatu', true)
+    this.setLoginStatu(true)
+
+  },
   //生命周期 - 挂载完成（可以访问DOM元素）
   mounted() {
     this.getSearchHot()
   }
+
 }
 </script>
+
 <style lang="stylus" scoped>
+
 .header {
   width: 100%;
   height: 64px;
@@ -246,7 +294,7 @@ export default {
   z-index: 2000;
 
   .logo {
-    width: 146px;
+    width: 150px;
     display: flex;
     align-items: center;
     margin-right: 30px;
@@ -257,12 +305,12 @@ export default {
       height: 64px;
       background-position: 0px center;
       background-repeat: no-repeat;
-      background-size: 146px 26px;
+      background-size: 150px 62px;
       background-image: url('../../../assets/images/logo.png');
     }
 
     img {
-      width: 130px;
+      width: 100%;
     }
   }
 

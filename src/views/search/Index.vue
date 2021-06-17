@@ -280,6 +280,7 @@ export default {
   }
 }
 </script>
+
 <style lang="stylus" scoped>
 .search-wrap {
   margin-top: -20px;

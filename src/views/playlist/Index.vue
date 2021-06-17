@@ -1,5 +1,6 @@
 <template>
   <div class="playlist-wrap container">
+    <!-- 标签选择 -->
     <div class="filter shadow">
       <div class="title flex-center" @click="openFilter">
         {{ currentCat }}
@@ -24,6 +25,7 @@
           </div>
         </transition>
       </div>
+      <!-- 热门标签 -->
       <div class="hot-tag flex-row">
         <p>热门标签：</p>
         <ul class="flex-center">
@@ -54,6 +56,7 @@
         </div>
       </div>
     </div>
+    <!-- 歌单列表 -->
     <song-sheet :sheetList="playList" v-loading="fullscreenLoading"></song-sheet>
     <div class="page-wrap">
       <el-pagination
@@ -72,6 +75,7 @@
 </template>
 
 <script>
+
 import songSheet from 'components/common/songSheet/Index'
 export default {
   data() {

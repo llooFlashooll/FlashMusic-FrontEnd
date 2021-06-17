@@ -1,5 +1,6 @@
 <template>
   <div class="banner">
+    <!-- vue-awesome-swiper -->
     <swiper class="swiper" :options="swiperOption" v-if="bannersInit">
       <swiper-slide v-for="item of banners" :key="item.imageUrl">
         <img :src="item.imageUrl" :alt="item.typeTitle" />

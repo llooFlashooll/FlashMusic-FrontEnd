@@ -1,5 +1,6 @@
 <template>
   <div class="video-detail container">
+    <!-- 视频详情左侧栏 -->
     <div class="left shadow">
       <div class="video-container">
         <video
@@ -94,6 +95,7 @@
         </div>
       </div>
     </div>
+    <!-- 视频右侧详情栏 -->
     <div class="right">
       <div class="profile module shadow">
         <div class="card-header flex-row">
