@@ -1,7 +1,7 @@
 import axios from 'axios'
 import qs from 'qs'
 import config from '../config'
-import router from '@/router'
+// import router from '@/router'
 import { Message } from 'element-ui'
 const { api_base_url } = config
 
@@ -43,10 +43,10 @@ instance.interceptors.response.use(
         if (status === 200) {
             return Promise.resolve(data)
         } else if (status === 301) {
-            Message.error({ message: '请先登录!' })
-            router.replace({
-                path: 'login'
-            })
+            // Message.error({ message: '请先登录!' })
+            // router.replace({
+            //     path: 'login'
+            // })
             return
         } else {
             return Promise.reject(response)

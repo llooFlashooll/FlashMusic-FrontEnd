@@ -173,7 +173,7 @@ a
 
 .add-cart
 {
-    margin-left : 30%;
+    margin-left : 25%;
 }
 
 </style>
