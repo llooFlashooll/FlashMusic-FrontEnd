@@ -208,7 +208,30 @@ export const appRouter = [{
             component: resolve => {
                 require(['@/views/mall/Index.vue'], resolve)
             }
+        },
+        {
+            path: 'cart',
+            meta: {
+                title: '购物车',
+                keepAlive: true
+            },
+            name: 'cart',
+            component: resolve => {
+                require(['@/views/cart/Index.vue'], resolve)
+            }
+        },
+        {
+            path: 'history',
+            meta: {
+                title: '历史记录',
+                keepAlive: true
+            },
+            name: 'history',
+            component: resolve => {
+                require(['@/views/history/Index.vue'], resolve)
+            }
         }
+
     ]
 }]
 

@@ -48,8 +48,12 @@
               <el-dropdown-item icon="el-icon-user" command="personal">
                 个人主页
               </el-dropdown-item>
-              <el-dropdown-item icon="el-icon-goods">我的购物车</el-dropdown-item>
-              <el-dropdown-item icon="el-icon-time">历史记录</el-dropdown-item>
+              <el-dropdown-item icon="el-icon-goods" command="cart">
+                我的购物车
+              </el-dropdown-item>
+              <el-dropdown-item icon="el-icon-time" command="history">
+                历史记录
+              </el-dropdown-item>
               
               <el-dropdown-item
                 divided
@@ -212,6 +216,16 @@ export default {
         case 'personal':
           this.$router.push({
             name: 'personal'
+          })
+          break
+        case 'cart':
+          this.$router.push({
+            name: 'cart'
+          })
+          break
+        case 'history':
+          this.$router.push({
+            name: 'history'
           })
           break
         case 'logout':
