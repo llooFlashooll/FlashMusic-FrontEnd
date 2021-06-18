@@ -4,6 +4,7 @@ import router from '@/router'
 import store from '@/store'
 import axios from 'axios'
 
+
 import getApi from '@/api/index'
 import utils from '@/utils/utils'
 import VueAwesomeSwiper from 'vue-awesome-swiper'
@@ -35,7 +36,8 @@ import {
     Popover,
     Tooltip,
     Slider,
-    Loading
+    Loading,
+    Dialog,
 } from 'element-ui'
 Vue.use(Avatar)
     .use(Image)
@@ -55,11 +57,13 @@ Vue.use(Avatar)
     .use(Tooltip)
     .use(Slider)
     .use(Loading)
+    .use(Dialog)
 Vue.config.productionTip = false
 Vue.prototype.$api = getApi
 Vue.prototype.utils = utils
 Vue.use(VueAwesomeSwiper)
 Vue.use(infiniteScroll)
+
 
 Vue.prototype.$axios = axios
 Vue.prototype.$msgbox = MessageBox

@@ -45,7 +45,7 @@ export default {
       try {
         let res = await this.$api.getSongDetail(sliceArr, timestamp)
         this.songs = this._normalizeSongs(res.songs)
-        console.log(this.songs)
+        // console.log(this.songs)
       } catch (error) {
         console.log(error)
       }

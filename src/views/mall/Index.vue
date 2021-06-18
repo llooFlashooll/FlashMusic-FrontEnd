@@ -25,7 +25,10 @@
             <li class="product-item" v-for="(item, index) in product" :key="index">
                 <img :src="item.picUrl" class="image">
                 <div class="product-desc"> {{ item.name }} </div>
-                <div class="product-price">¥ {{ item.price }}</div>
+                <div class="product-price">
+                    <span class="price">¥ {{ item.price }}</span>
+                    <el-button icon="el-icon-goods" circle class="add-cart" @click="openAddCart(item.name)"></el-button>
+                </div>
             </li>
         </ul>
     </div>
@@ -56,6 +59,45 @@ export default {
             .catch(err => {
                 console.log(err);
             })
+        },
+        addCart(name, num, token) {
+            this.$axios.post("http://47.103.56.113:5000/cart/cartadd", {
+                name: name,
+                num: num
+            }, {
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': token
+                }
+            })
+            .then((res) => {
+                var response = res.data
+                this.$message({
+                    type: 'success',
+                    message: response.msg
+                });
+            })
+            .catch((err) => {
+                console.log(err);
+            })
+        },
+        openAddCart(name) {
+            this.$prompt(
+                '请输入个数', 
+                '加入购物车', {
+                confirmButtonText: '确定',
+                cancelButtonText: '取消',
+            })
+            .then(({ value }) => {
+                var token = "Bearer" + " " + window.localStorage.getItem("token")
+                this.addCart(name, value, token);
+            })
+            .catch(() => {
+                this.$message({
+                    type: 'info',
+                    message: '已取消'
+                });          
+            });
         }
     },
     created() {
@@ -121,8 +163,17 @@ a
     margin-top : 5px;
     font-weight : bold;
     font-size: 16px;
-    text-align : center;
     color : red;
+}
+
+.price
+{
+    margin-left : 40%;
+}
+
+.add-cart
+{
+    margin-left : 30%;
 }
 
 </style>

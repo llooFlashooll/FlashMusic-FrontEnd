@@ -51,13 +51,13 @@
               <el-dropdown-item icon="el-icon-goods">我的购物车</el-dropdown-item>
               <el-dropdown-item icon="el-icon-time">历史记录</el-dropdown-item>
               
-              <!-- <el-dropdown-item
+              <el-dropdown-item
                 divided
                 icon="el-icon-switch-button"
                 command="logout"
               >
                 退出登录
-              </el-dropdown-item> -->
+              </el-dropdown-item>
             </el-dropdown-menu>
           </el-dropdown>
         </div>
@@ -215,21 +215,23 @@ export default {
           })
           break
         case 'logout':
-          var res = await this.$api.logout()
-          console.log(res)
-          if (res.code === 200) {
-            this.$router.push({
-              name: 'login'
-            })
-            localStorage.setItem('loginStatu', false)
-            localStorage.setItem('token', '')
-            localStorage.setItem('userInfo', '')
-          }
+          window.localStorage.setItem('loginStatu', false)
+          window.localStorage.setItem('token', '')
+          window.localStorage.setItem('userInfo', '')
+          this.setLoginStatu(false)
+          this.$message({
+            message: '退出登录',
+            type: 'info'
+          })
+          this.$router.push({
+            name: 'login'
+          })
           break
         default:
           break
       }
     },
+
 
     // 获取个人信息
     async getUserDetail(uid) {
@@ -267,16 +269,15 @@ export default {
   //生命周期 - 创建完成（可以访问当前this实例）
   created() {
     // 获取用户信息
-    this.loginLoading = false
-    this.getUserDetail("545406676")
-    window.localStorage.setItem('loginStatu', false)
-    this.setLoginStatu(true)
-
+    // this.loginLoading = false
+    // this.getUserDetail("545406676")
+    // window.localStorage.setItem('loginStatu', true)
+    // this.setLoginStatu(true)
   },
   //生命周期 - 挂载完成（可以访问DOM元素）
   mounted() {
     this.getSearchHot()
-  }
+}
 
 }
 </script>

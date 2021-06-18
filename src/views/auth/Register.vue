@@ -1,115 +1,142 @@
 <template>
-  <div class="page">
 
-    <el-card class="box" shadow="always">
-      <el-row class="title">
-        <h2>注册</h2>
-      </el-row>
-      <el-form label-width="0">
+  <div class="register-container">
+
+    <div>
+      <h1 class="welcome">欢迎使用 FlashMusic</h1>
+    </div>
+
+    <h2 class="title">注册</h2>
+
+    <el-form class="register-form">
         <el-form-item>
-          <i class="el-icon-user"></i>
-          <el-input class="form-input" v-model="username" placeholder="用户名">
-          </el-input>
+            <i class="el-icon-position"></i>
+            <el-input class="form-input" v-model="email" placeholder="邮箱">
+            </el-input>
         </el-form-item>
-
         <el-form-item>
-          <i class="el-icon-s-goods"></i>
-          <el-input class="form-input" v-model="password" placeholder="密码" show-password>
-          </el-input>
+            <i class="el-icon-user"></i>
+            <el-input class="form-input" v-model="username" placeholder="用户名">
+            </el-input>
         </el-form-item>
-
-        <el-form-item >
-          <i class="el-icon-s-goods"></i>
-          <el-input class="form-input" v-model="confirmPassword" placeholder="确认密码" show-password>
-          </el-input>
-        </el-form-item>
-
-        <el-form-item >
-          <i class="el-icon-message"></i>
-          <el-input class="form-input" v-model="email" placeholder="邮箱">
-          </el-input>
-        </el-form-item>
-
         <el-form-item>
-          <i class="el-icon-position"></i>
-          <el-input class="form-input verifyCode" v-model="verifyCode" placeholder="验证码">
-          </el-input>
-          <el-button type="primary" class="form-button btnCode" v-on:click="getVerifyCode" round>获取验证码</el-button>
+            <i class="el-icon-s-goods"></i>
+            <el-input class="form-input" v-model="password" placeholder="密码" show-password>
+            </el-input>
+        </el-form-item>
+        <el-form-item>
+            <i class="el-icon-s-goods"></i>
+            <el-input class="form-input" v-model="confirmPassword" placeholder="确认密码" show-password>
+            </el-input>
         </el-form-item>
 
-        <el-form-item class="register">
-          <el-button type="primary" class="form-button" v-on:click="register" round>注册</el-button>
-          <el-button type="primary" class="form-button" v-on:click="toLogin" round>去登陆</el-button>
+        <el-form-item class="button-group">
+            <el-button type="primary" class="form-button" v-on:click="register" round id="register">注册</el-button>
+            <el-button type="primary" class="form-button" v-on:click="toLogin" round id="login">去登录</el-button>
         </el-form-item>
-      </el-form>
-    </el-card>
+
+    </el-form>
+
+
+    
   </div>
 </template>
 
 <script>
+
 export default {
-  name: 'Register',
-  data() {
+  name: "Register",
+  data(){
     return {
-      username:'',
-      password:'',
-      confirmPassword:'',
-      email:'',
-      verifyCode:'',
+      email: '',
+      username: '',
+      password: '',
+      confirmPassword: ''
     }
   },
   mounted() {
-    document.querySelector('body').setAttribute('style', 'background-color: aliceblue')
   },
   beforeDestroy() {
-    document.querySelector('body').removeAttribute('style')
   },
   methods:{
-    getVerifyCode:function() {
+    register: function () {
+      if(this.password != this.confirmPassword) {
+        alert("填写密码不一致")
+      }
+      else {
+        this.$axios.post("http://47.103.56.113:5000/register",
+          {
+            email: this.email,
+            username: this.username,
+            password: this.password
+          })
+          .then((res) => {
+            // console.log(res);
+            var response = res.data
+            if(response.code == -1) {
+              alert(response.msg);
+            }
+            else {
+              this.$message({
+                message: '注册成功',
+                type: 'success'
+              })
+              this.toLogin();
+            }
+          })
+          .catch((err) => {
+            console.log(err);
+          })
 
+      }
     },
 
-    register:function() {
-     
-    },
-
-    toLogin:function(){
-      location="./login";
+    toLogin: function() {
+      this.$router.replace({
+        name: 'login'
+      })
     }
-
 
   }
 }
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-.page {
-  width: 100%;
-  /* height: 100%;
-  background-color: aliceblue; */
+
+.register-container {
+    width: 100%;
+    height: 100%;
+    background-color: aliceblue;
 }
 
-.box {
-  width: 30%;
-  margin-top: 100px;
-  margin-left: 35%;
+.welcome {
+    padding-top: 5%;
+    text-align: center;
+    font-size: 24px;
+    font-weight: bold;
 }
+
 
 .title {
-  text-align: center;
+    margin-top: 5%;
+    font-weight: bold;
+    font-size: 20px;
+    text-align: center;
+}
+
+.register-form {
+    width: 30%;
+    margin-top: 30px;
+    margin-left: 35%;
 }
 
 .form-input {
   width: 80%;
 }
 
-.verifyCode {
-  width: 55%;
-}
-
-#verifyCode {
-  margin-right: 10%;
+.el-icon-position {
+  font-size: 25px;
+  margin: 0 20px;
 }
 
 .el-icon-user {
@@ -122,22 +149,8 @@ export default {
   margin: 0 20px;
 }
 
-.el-icon-message {
-  font-size: 25px;
-  margin: 0 20px;
-}
-
-.el-icon-position {
-  font-size: 25px;
-  margin: 0 20px;
-}
-
-.btnCode {
-  margin-left: 15px;
-  padding: 11px;
-}
-
-.register {
+.button-group {
   text-align: center;
 }
+
 </style>

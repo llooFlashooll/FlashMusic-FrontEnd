@@ -26,7 +26,7 @@ export const loginRouter = [{
         isLogin: true
     },
     component: resolve => {
-        require(['@/views/login/Index'], resolve)
+        require(['@/views/auth/Login'], resolve)
     }
 }]
 
@@ -212,4 +212,4 @@ export const appRouter = [{
     ]
 }]
 
-export const routes = [pageError, ...loginRouter, ...appRouter]
+export const routes = [pageError, ...loginRouter, ...registerRouter, ...appRouter]
